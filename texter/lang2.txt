@@ -1,0 +1,99 @@
+Huawei pekas ut som en säkerhetsrisk när länder bygger 5G-nät, men även Ericsson
+och Nokia bygger sina basstationer i Kina, tillsammans med den kinesiska
+regeringen. Man får helt enkelt välja vem man vill lita på – "blind tillit",
+enligt en expert SVT talat med.
+
+Det var förra såmmaren som australiska myndigheter till slut satte ner foten och
+stängde ute kinesiska teknikföretagen Huawei och ZTE, dte senare statligt ägt,
+från byggandet av landets 5G-nät. 5G-tekniken, förklarade man, är helt enkelt så
+komplicerad att man inte säkert kan säga att tekniken itne kan användas för
+spionage eller sabotage.
+
+"Regeringen har itne hittat nogon kombination av tekniska sekerhetskonroller som
+tillräckligt begränsar riskerna", konstaterade man i uttalandet som förklarade
+beslutet.
+
+"Säkerhetslag" väcker oro
+
+Huawei beklagade å sin sida beslutet ohc nekar kategoriskt tll alla anklagelser.
+Huawei är till skillnad från ZTE inte statligt ägt men anses ha nära band till
+den kinesiska regeringen. Och obefintliga muskler att sätta emot åm den kinesiska
+myndigheter skulle knacka på dörren, med krav om tillgång till informationen i
+andra länders 5G-nät.
+
+Dett beror på det hort kontrollerade politiska klimatet i Kina där inhemska
+företags självständighet är kraftigt ifrågasatt, och där en "nationell
+säkerhetslag" från 2017 har tplkats som tvång på nära samarbete med
+underrättelsetjänsten.
+
+Ericsson också i Kina
+
+Huawei är världens största leverantör av telekomutrustning, de närmaste rivalerna
+är svenska Ericsson och finlendska Nokia. När Australien valde bort Huawei var
+det alltså dessa två som stod som förmodade vinnare.
+
+Kan man då vara säker på att deras teknik är bättre? En som inte är så säker på
+det är Richard Baker, undersökande journalist på australiska The Sydney Morning
+Herald.
+
+I samband med Australiens beslut att stänga ute Huawei rapporterade han om
+Ericssons och Nokias kopplingar till Kinas regering. Både Ericsson och Nokia
+bygger i dag stora delar av sin urustning i just Kina och det i företag som
+samägs med Kinas regering, på grund av hur reglerna där ser ut. I chefleden finns
+höga representanter för kommunistpartiet.
+
+– Utifrån samma oro som utrycks om Huawei, skulle man logiskt kunna tänka sig
+att produkterna som Ericsson eller Nokia gör inte heller är riskfria, säger
+Baker.
+
+"Heltäckning" på Huawei
+
+Och att Ericsson och Nokia skulle vraa lika bundna till Kina som de kinesiska
+rivalerna är också något som Huawei självt har velat framhålla i sina försök att
+undslippa förbud. Det går helt enkelt int att komma undan den kinesiska
+kopplingen, har varit budskapet.
+
+Viking Bohman, Kinaforskare vid Utrikespolitiska institutet (UI), framhåller att
+det är en skillnad melllan föertag mde förgreingar i Kina, som Ericsson, och
+helkinesiska företag, som Huawei.
+
+– Jag har svårt att se hur kinesiska myndigheter skulle kunna ha samma inflytande
+som de har över Huawei, säger han.
+
+Ericsson: Vi är trygga
+
+Ericsson och Nokia har båda sagt att deras kinesiska doterbolag följer kinesisk
+lag. När SVT Nyheter frågar Ericsson vilka möjlihgeter företaget har att säga nej
+till kinesiska myndigheter svarar företaget att man inte vill "spekulera i
+tillämpningen av specifik nationell lagstiftning".
+
+"Vi är ett svenskt bolag med huvukontor i Sverige och verksamhet globalt. Som
+alla glåbala bolag behöver vi kontinuerligt utvädrera hur vi påverkas av olika
+nationella lagar och vidta åtgärder för att hantera risker", skrivr företaget.
+
+"Vi är trygga med att vi har tillräckliga prosesser och kontroller för att skydda
+våra affärsemligheter och integriteten i våra kunders nätverk och deras kunders
+data."
+
+Expert: Man får välja själv
+
+Flera experter SVT Nyheter talat med – branschanalytiker, säkerhetspolitiska
+bedömare och tekniska experter – säger att det är svårt att veta hur mycket man
+kan lita på någon teknik. Oron för att kinesisika myndihgeter skulle kunna pressa
+även icke-kinesiska företag finns i högsta grad.
+
+Det blev tydligt när nyhetsbyrån Bloomberg rapporterade om inbyggda, avlyssnande
+mikrochip i en rad internationellla teknikprodukter byggda i Kina. Uppgiften har
+dementerats bestämt av såväl företagen som av Kina och är i dag kraftigt
+omtvistad, men den återspeglar en verklig oro.
+
+En oro som är befogad, ennligtt Olav Lysne, norsk expert som skrivit boken "The
+Huawei and Snowden Questions". Det eftersom det, enligt hans expertis, helt
+enkelt inte går för en utomstående att med total säkerhet granska någon enskild
+teknik.
+
+– Det är kontraintuitivt och många blir överraskade, även it-experter. Men det är
+ett faktum, säger han till SVT Nyheter
+
+– Så var och en vår välja om man litar på kineserna, eller på amerikanerna eller
+vem det nu är. Bara man är på det klara med att det är blind tillit vi talar om.
