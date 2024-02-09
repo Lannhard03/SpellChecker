@@ -5,7 +5,6 @@ use crate::bloomfilter::BloomFilter;
 use crate::data::{Text, SpellingError};
 use rayon::prelude::*;
 
-
 pub struct SpellChecker<'a> {
     bk_tree: BKTreeWords<'a>,
     bloom_filter: BloomFilter,

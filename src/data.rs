@@ -1,11 +1,6 @@
 use core::fmt;
 use std::fs;
 use unicode_segmentation::UnicodeSegmentation;
-use indextree::Arena;
-use std::cmp;
-use std::hash::{Hasher, BuildHasher};
-use ahash::{AHasher, RandomState};
-use serde::{Serialize, Deserialize};
 
 pub struct WordDict {
     frequency_data: Vec<String>,

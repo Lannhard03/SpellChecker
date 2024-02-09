@@ -8,6 +8,7 @@ pub struct BKTreeWords<'a>
     pub dist_fn: fn(&str, &str) -> i8, 
     pub dist_max: i8
 }
+
 impl<'a> BKTreeWords<'a>
 {
     pub fn build(word_list: &'a WordDict, dist_fn: fn(&str, &str) -> i8) -> Self 
@@ -84,4 +85,3 @@ impl<'a> BKTreeWords<'a>
         return Some(best_word.clone());
     }
 }
-
