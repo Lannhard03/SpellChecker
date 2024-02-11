@@ -11,7 +11,6 @@ pub fn levenshtien_distance(s1: &str, s2: &str) -> i8 {
 
     let mut distances: Vec<u8> = vec![0; c1.len() + 1];
     let mut new_distances: Vec<u8> = Vec::with_capacity(distances.len());
-
     for (index2, char2) in c2.iter().enumerate() {
         new_distances.push(index2 as u8 + 1);
         for (index1, char1) in c1.iter().enumerate() {

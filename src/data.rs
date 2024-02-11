@@ -50,7 +50,7 @@ impl WordDict {
         let word_data = WordDict::new(data);
         Ok(word_data)
     }
-    //Unnessecary getters and setters
+
     pub fn word_in_data(&self, word: String) -> bool {
         self.frequency_data.contains(&word)
     }

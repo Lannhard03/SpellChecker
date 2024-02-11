@@ -4,7 +4,7 @@ use crate::data::WordDict;
 
 pub struct BKTreeWords<'a>
 {
-    bk_tree: Arena<(&'a String,i8)>, //change this to a struct to have named fields
+    bk_tree: Arena<(&'a String,i8)>,
     pub dist_fn: fn(&str, &str) -> i8, 
     pub dist_max: i8
 }
@@ -53,8 +53,6 @@ impl<'a> BKTreeWords<'a>
         if self.bk_tree.is_empty() {
             return None;
         }
-        //Do you really need to create
-        //iter of entire list
         let mut nodes_to_process: Vec<_> = self.bk_tree.iter().take(1).collect(); 
         let mut best_word: &String = &String::from("");
         let mut best_dist = self.dist_max;
@@ -65,14 +63,15 @@ impl<'a> BKTreeWords<'a>
                 (best_word, best_dist) = (current_node.get().0, current_dist);
             }
 
-            //if best_dist == 0 {println!("LESS GO")};
 
             let first_child = current_node.first_child();
+
             if first_child.is_none() {continue;}
+
             let mut current_child = &self.bk_tree[first_child.unwrap()];
             loop {
-                if (current_dist-current_child.get().1).abs() <= best_dist {
-                    //println!("Added to nodes to search {}", current_child.get().0);
+                let triangle_inequality = (current_dist-current_child.get().1).abs() <= best_dist;
+                if triangle_inequality {
                     nodes_to_process.push(current_child);
                 }
                 match current_child.next_sibling() {
