@@ -12,6 +12,7 @@ pub mod bktree;
 pub mod bloomfilter;
 
 #[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
 pub struct Args {
     ///Enter path of dictionary file here:
     #[arg(short, long)]

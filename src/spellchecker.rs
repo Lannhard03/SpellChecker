@@ -23,7 +23,16 @@ impl<'a> SpellChecker<'a> {
     
     pub fn create_report(report_name: &String, errors: &Vec<SpellingError>) ->  Result<(), std::io::Error> {
         println!("Creating report in file: {}", report_name);
-        let mut report_file = fs::File::create(format!("./reports/{}", report_name))?;
+        let file_creation = fs::File::create(format!("./reports/{}", report_name));
+        let mut report_file;
+        match file_creation {
+            Err(_) => {
+                println!("Could not find report folder. Creating report folder.");
+                fs::create_dir("./reports")?;
+                return SpellChecker::create_report(report_name, errors);
+            }
+            Ok(n) => {report_file = n;}
+        }
         let header = format!("Spell check for text in {}", report_name);
         report_file.write_all(&header[..].as_bytes())?;
         report_file.write_all(b"\n")?;
