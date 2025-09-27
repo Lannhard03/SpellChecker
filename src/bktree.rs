@@ -2,6 +2,11 @@ use indextree::{Arena, NodeId};
 use std::cmp;
 use crate::data::WordDict;
 
+//Note:
+//Maybe it is worth to store the strings as u8[] in the BKtree
+//and the convert when printing!
+
+
 pub struct BKTreeWords<'a>
 {
     bk_tree: Arena<(&'a String,i8)>,
@@ -56,38 +61,33 @@ impl<'a> BKTreeWords<'a>
             return None;
         }
         //Take the root node of the bk_tree, guarenteed to exist.
-        let root_node = self.bk_tree.get(self.root_id).unwrap();
         //Nodes to process is used as a stack, with the last element being
         //the top of the stack. 
         let mut nodes_to_process: Vec<_> = Vec::with_capacity(10);
-        nodes_to_process.push(root_node);
+        nodes_to_process.push(self.root_id);
         let mut best_word: &String = &String::from("");
         let mut best_dist = self.dist_max;
         while nodes_to_process.len() > 0 {
             //By above condition, there is atleast one element in the stack.
-            let current_node = nodes_to_process.pop().unwrap();
+            let current_node_id = nodes_to_process.pop().unwrap();
+            let current_node = &self.bk_tree[current_node_id]; //maybe use .get syntax here!!
             let current_dist = (self.dist_fn)(current_node.get().0, word_to_check);
             if current_dist < best_dist {
                 (best_word, best_dist) = (current_node.get().0, current_dist);
             }
 
-
-            let first_child = current_node.first_child();
-
-            if first_child.is_none() {continue;}
-
-            let mut current_child = &self.bk_tree[first_child.unwrap()];
-            loop {
+            let children = current_node_id.children(&self.bk_tree);
+            
+            for child in children {
+                let current_child = &self.bk_tree[child]; //.get syntax??
                 let diff = current_dist - current_child.get().1;
                 let triangle_inequality = diff <= best_dist && diff >= -best_dist;
                 if triangle_inequality {
-                    nodes_to_process.push(current_child);
+                    nodes_to_process.push(child);
                 }
-                match current_child.next_sibling() {
-                    Some(child) => current_child = &self.bk_tree[child],
-                    None => break,
-                }
+
             }
+
         }
         
         return Some(best_word.clone());

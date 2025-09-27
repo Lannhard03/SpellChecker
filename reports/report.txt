@@ -1,9 +1,8 @@
 Spell check for text in report.txt
-Incorrect Word: såmmaren, Suggested correction: sommaren
 Incorrect Word: nogon, Suggested correction: vogon
 Incorrect Word: sekerhetskonroller, Suggested correction: säkerhetskontroller
 Incorrect Word: säkerhetslag, Suggested correction: säkerhetssal
-Incorrect Word: åm, Suggested correction: im
+Incorrect Word: åm, Suggested correction: kåm
 Incorrect Word: säkerhetslag, Suggested correction: säkerhetssal
 Incorrect Word: 2017, Suggested correction: 2-17b
 Incorrect Word: tplkats, Suggested correction: tolkats
@@ -11,14 +10,13 @@ Incorrect Word: finlendska, Suggested correction: finländska
 Incorrect Word: urustning, Suggested correction: utrustning
 Incorrect Word: chefleden, Suggested correction: chefsleden
 Incorrect Word: utrycks, Suggested correction: uttrycks
-Incorrect Word: heltäckning, Suggested correction: taltäckning
+Incorrect Word: heltäckning, Suggested correction: betäckning
 Incorrect Word: vraa, Suggested correction: vraka
-Incorrect Word: kinaforskare, Suggested correction: skolforskare
+Incorrect Word: kinaforskare, Suggested correction: kth-forskare
 Incorrect Word: melllan, Suggested correction: melloan
 Incorrect Word: föertag, Suggested correction: föeretag
-Incorrect Word: mde, Suggested correction: mode
 Incorrect Word: förgreingar, Suggested correction: förgreningar
-Incorrect Word: helkinesiska, Suggested correction: ex-kinesiskan
+Incorrect Word: helkinesiska, Suggested correction: balinesiska
 Incorrect Word: doterbolag, Suggested correction: dotterbolag
 Incorrect Word: huvukontor, Suggested correction: huvudkontor
 Incorrect Word: glåbala, Suggested correction: globala
@@ -31,5 +29,5 @@ Incorrect Word: myndihgeter, Suggested correction: myndigeter
 Incorrect Word: avlyssnande, Suggested correction: avlyssnandet
 Incorrect Word: internationellla, Suggested correction: internationella
 Incorrect Word: teknikprodukter, Suggested correction: denimprodukter
-Incorrect Word: ennligtt, Suggested correction: ärenligt
+Incorrect Word: ennligtt, Suggested correction: enlligt
 Incorrect Word: lysne, Suggested correction: lystne

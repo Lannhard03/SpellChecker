@@ -66,7 +66,7 @@ impl Config {
 
         println!("Number of hashes is: {}", bloom_filter.optimal_num_hashers);
 
-        let bk_tree = BKTreeWords::build(&self.data, med::levenshtien_distance);
+        let bk_tree = BKTreeWords::build(&self.data, med::lev_dist_opt);
         println!("Maximum distance: {}", bk_tree.dist_max);
         let checker = SpellChecker::new(bk_tree, bloom_filter); 
 
