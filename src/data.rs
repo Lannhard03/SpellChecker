@@ -40,8 +40,11 @@ impl WordDict {
 
     pub fn load_data(data_path: &str) -> Result<WordDict, std::io::Error> {
         let contents = fs::read_to_string(data_path)?;
-        let mut data = Vec::new();
+        let lines = contents.split("\n");
+        let mut data = Vec::with_capacity(lines.count());
         for line in contents.split("\n") {
+            //Here we discard the frequency of the words, but the ordering by freq.
+            //is used implicitly when BKtree is constructed.
             let data_string = String::from(line.split("\t").next().unwrap());
             if !data_string.is_empty() {
                 data.push(data_string);

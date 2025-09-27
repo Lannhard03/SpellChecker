@@ -1,10 +1,11 @@
-use indextree::Arena;
+use indextree::{Arena, NodeId};
 use std::cmp;
 use crate::data::WordDict;
 
 pub struct BKTreeWords<'a>
 {
     bk_tree: Arena<(&'a String,i8)>,
+    root_id: NodeId,
     pub dist_fn: fn(&str, &str) -> i8, 
     pub dist_max: i8
 }
@@ -14,12 +15,13 @@ impl<'a> BKTreeWords<'a>
     pub fn build(word_list: &'a WordDict, dist_fn: fn(&str, &str) -> i8) -> Self 
     {
         let data = word_list.get_data();
-        let mut bk_tree = Arena::new();
+        let mut bk_tree = Arena::with_capacity(data.len());
         let root = bk_tree.new_node((&data[0], 0));
         let mut dist_max = 0;
-        //Add each word to BK-tree structure
+        let mut current_node;
+        //Add each word to BK-tree structure (skip first node)
         for word in data.iter().skip(1) {
-            let mut current_node = root;
+            current_node = root;
             //Traverse tree to find where to add word.
             'traversal: loop {
                 let dist = dist_fn(word, bk_tree[current_node].get().0);
@@ -35,9 +37,8 @@ impl<'a> BKTreeWords<'a>
                 }
 
                 //If no child has the same distance, add a new child with that distance
-                let new_node = bk_tree.new_node((word, dist)); 
                 dist_max = cmp::max(dist_max, dist); 
-                current_node.append(new_node, &mut bk_tree);
+                current_node.append_value((word, dist), &mut bk_tree);
                 break;
             } 
         }
@@ -45,6 +46,7 @@ impl<'a> BKTreeWords<'a>
          
         BKTreeWords { 
                     bk_tree: bk_tree,
+                    root_id: root,
                     dist_fn: dist_fn,
                     dist_max: dist_max,
                     }              
@@ -53,10 +55,16 @@ impl<'a> BKTreeWords<'a>
         if self.bk_tree.is_empty() {
             return None;
         }
-        let mut nodes_to_process: Vec<_> = self.bk_tree.iter().take(1).collect(); 
+        //Take the root node of the bk_tree, guarenteed to exist.
+        let root_node = self.bk_tree.get(self.root_id).unwrap();
+        //Nodes to process is used as a stack, with the last element being
+        //the top of the stack. 
+        let mut nodes_to_process: Vec<_> = Vec::with_capacity(10);
+        nodes_to_process.push(root_node);
         let mut best_word: &String = &String::from("");
         let mut best_dist = self.dist_max;
         while nodes_to_process.len() > 0 {
+            //By above condition, there is atleast one element in the stack.
             let current_node = nodes_to_process.pop().unwrap();
             let current_dist = (self.dist_fn)(current_node.get().0, word_to_check);
             if current_dist < best_dist {
@@ -70,7 +78,8 @@ impl<'a> BKTreeWords<'a>
 
             let mut current_child = &self.bk_tree[first_child.unwrap()];
             loop {
-                let triangle_inequality = (current_dist-current_child.get().1).abs() <= best_dist;
+                let diff = current_dist - current_child.get().1;
+                let triangle_inequality = diff <= best_dist && diff >= -best_dist;
                 if triangle_inequality {
                     nodes_to_process.push(current_child);
                 }

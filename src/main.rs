@@ -5,6 +5,7 @@ use crate::bloomfilter::BloomFilter;
 use crate::data::{WordDict, Text};
 use clap::Parser;
 
+
 pub mod med;
 pub mod data;
 pub mod spellchecker;
@@ -58,6 +59,7 @@ impl Config {
     }
     
     pub fn run(&self) {
+        let now = Instant::now();
         let bloom_filter = BloomFilter::build(&self.data, self.error_rate);
         println!("Lenght of bloom_filter is: {}, and lenght of dictionary is: {}", 
                  bloom_filter.optimal_len, self.data.get_data().len());
@@ -66,7 +68,6 @@ impl Config {
 
         let bk_tree = BKTreeWords::build(&self.data, med::levenshtien_distance);
         println!("Maximum distance: {}", bk_tree.dist_max);
-        let now = Instant::now();
         let checker = SpellChecker::new(bk_tree, bloom_filter); 
 
         let spelling_errors = checker.spell_check_text(&self.text);
