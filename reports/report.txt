@@ -1,4 +1,5 @@
 Spell check for text in report.txt
+Incorrect Word: såmmaren, Suggested correction: sångaren
 Incorrect Word: nogon, Suggested correction: vogon
 Incorrect Word: sekerhetskonroller, Suggested correction: säkerhetskontroller
 Incorrect Word: säkerhetslag, Suggested correction: säkerhetssal
@@ -30,4 +31,3 @@ Incorrect Word: avlyssnande, Suggested correction: avlyssnandet
 Incorrect Word: internationellla, Suggested correction: internationella
 Incorrect Word: teknikprodukter, Suggested correction: denimprodukter
 Incorrect Word: ennligtt, Suggested correction: enlligt
-Incorrect Word: lysne, Suggested correction: lystne

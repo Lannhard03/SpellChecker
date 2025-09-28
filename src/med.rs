@@ -31,26 +31,26 @@ pub fn levenshtien_distance(s1: &str, s2: &str) -> i8 {
     *distances.last().unwrap() as i8
 }
 
-pub fn lev_dist_opt(s1: &str, s2: &str) -> i8 {
+pub fn lev_dist_opt(s1: &[u8], s2: &[u8]) -> i8 {
     //We convert strings into arrays since we need to access
     //the same elements several times
-    let c1: Vec<u8> = s1.bytes().collect();
-    let c2: Vec<u8> = s2.bytes().collect();
+    //let c1: Vec<u8> = s1.bytes().collect();
+    //let c2: Vec<u8> = s2.bytes().collect();
 
     let mut d1: Vec<usize> = vec![0; s2.len()+1]; 
     let mut d2: Vec<usize> = vec![0; s2.len()+1]; 
     
-    for i in 0..c2.len()+1 {
+    for i in 0..s2.len()+1 {
         d1[i] = i;
     }
 
-    for i in 0..c1.len() {
+    for i in 0..s1.len() {
         d2[0] = i + 1;
-        for j in 0..c2.len() {
+        for j in 0..s2.len() {
             let del_cost = d1[j+1] + 1;
             let ins_cost = d2[j] + 1;
             
-            let sub_cost = if c2[j] == c1[i] {
+            let sub_cost = if s2[j] == s1[i] {
                 d1[j]
             } else {
                 d1[j] + 1
@@ -60,7 +60,7 @@ pub fn lev_dist_opt(s1: &str, s2: &str) -> i8 {
         }
         std::mem::swap(&mut d1, &mut d2);
     }
-    return d1[c2.len()] as i8;
+    return d1[s2.len()] as i8;
 }
 
 #[cfg(test)]
