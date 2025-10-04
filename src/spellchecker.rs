@@ -15,9 +15,9 @@ impl<'a> SpellChecker<'a> {
     }
     pub fn spell_check_text(&self, text: &'a Text) -> Vec<SpellingError<'a>> {
         text.get_text().into_par_iter()
-                  .filter(|word| !self.bloom_filter.in_filter(&word))
-                  .map(|word| (word, self.bk_tree.find_correction(&word)))
-                  .map(|word_tuple| SpellingError::new(&word_tuple.0, word_tuple.1))
+                  .filter(|(_line, word)| !self.bloom_filter.in_filter(&word))
+                  .map(|(line, word)| (word, line, self.bk_tree.find_correction(&word)))
+                  .map(|word_tuple| SpellingError::new(&word_tuple.0, *word_tuple.1, word_tuple.2))
                   .collect()
     }
     

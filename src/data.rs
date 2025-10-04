@@ -7,18 +7,20 @@ pub struct WordDict {
 }
 
 pub struct Text {
-    words: Vec<String>,
+    words: Vec<(usize, String)>,
 }
 
 pub struct SpellingError<'a> {
     original_word: &'a str,
+    line_number: usize,
     recommended_correction: Option<String>,
 }
 
 impl<'a> SpellingError<'a> {
-    pub fn new(original_word: &'a str, recommended_correction: Option<String>) -> Self {
+    pub fn new(original_word: &'a str, line_number: usize, recommended_correction: Option<String>) -> Self {
         SpellingError {
             original_word: original_word, 
+            line_number: line_number,
             recommended_correction: recommended_correction, 
         }
     }
@@ -27,7 +29,8 @@ impl<'a> SpellingError<'a> {
 impl fmt::Display for SpellingError<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.recommended_correction.clone() {
-            Some(word) => write!(f, "Incorrect Word: {}, Suggested correction: {}", self.original_word, word),
+            Some(word) => write!(f, "Incorrect Word on line {}: {}, Suggested correction: {}", self.line_number,
+                                 self.original_word, word),
             None => write!(f, "Found no correction for word: {}", self.original_word), 
         }
     }
@@ -66,11 +69,20 @@ impl WordDict {
 impl Text {
     pub fn load_text(text_path: &str) -> Result<Text, std::io::Error> {
         let contents = fs::read_to_string(text_path)?;
-        let data = contents.unicode_words().map(|word| String::from(word.to_lowercase())).collect();
+        let lines = contents.lines();
+        let data: Vec<(usize, String)> = lines
+            .enumerate()
+            .flat_map(|(line_num, line)| {
+                line.unicode_words()
+                    .map( |word| 
+                            (line_num, String::from(word.to_lowercase()))
+                    ).collect::<Vec<(usize, String)>>()
+            }).collect();
+        //let data = contents.unicode_words().map(|word| String::from(word.to_lowercase())).collect();
         Ok(Text{ words: data})
     }
 
-    pub fn get_text(&self) -> &Vec<String> {
+    pub fn get_text(&self) -> &Vec<(usize, String)> {
         &self.words
     }
 }
