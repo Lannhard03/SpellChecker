@@ -3,6 +3,7 @@ name = "spell_checker"
 version = "0.1.0"
 edition = "2021"
 
+#Needed for flamegraph
 [profile.release]
 debug = true
 
