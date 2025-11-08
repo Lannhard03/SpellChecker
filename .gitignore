@@ -2,3 +2,4 @@ target/
 *.svg
 .DS_Store
 reports/
+spellcheckers/

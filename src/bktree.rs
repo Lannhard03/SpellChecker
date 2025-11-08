@@ -1,27 +1,31 @@
 use indextree::{Arena, NodeId};
 use std::cmp;
 use crate::data::WordDict;
+use bincode::{Encode, Decode};
+use crate::med::lev_dist_opt;
 
 
-pub struct BKTreeWords<'a>
+#[derive(Encode, Decode)]
+pub struct BKTreeWords
 {
-    bk_tree: Arena<(&'a [u8], i8)>,
+    #[bincode(with_serde)]
+    bk_tree: Arena<(Vec<u8>, i8)>,
+    #[bincode(with_serde)]
     root_id: NodeId,
-    pub dist_fn: fn(&[u8], &[u8]) -> i8, 
     pub dist_max: i8
 }
 
 
-impl<'a> BKTreeWords<'a>
+impl BKTreeWords
 {
-    pub fn build(word_list: &'a WordDict, dist_fn: fn(&[u8], &[u8]) -> i8) -> Option<Self> 
+    pub fn build(word_list: &WordDict, dist_fn: fn(&[u8], &[u8]) -> i8) -> Option<Self> 
     {
         if word_list.len() == 0 {
             return None;
         }
 
         let mut dict_bytes = word_list.get_data().iter()
-                                             .map(|s| s.as_bytes());
+                                             .map(|s| s.as_bytes().to_vec());
 
         let mut bk_tree = Arena::with_capacity(word_list.len());
         let root = bk_tree.new_node((dict_bytes.next().unwrap(), 0));
@@ -33,7 +37,7 @@ impl<'a> BKTreeWords<'a>
             current_node = root;
             //Traverse tree to find where to add word.
             'traversal: loop {
-                let dist = dist_fn(word, bk_tree[current_node].get().0);
+                let dist = dist_fn(&word, &bk_tree[current_node].get().0);
 
                 //Disregard duplicate words from the word list
                 if dist == 0 {break;}
@@ -57,7 +61,7 @@ impl<'a> BKTreeWords<'a>
         }
 
          
-        Some(BKTreeWords {bk_tree, root_id : root, dist_fn, dist_max})            
+        Some(BKTreeWords {bk_tree, root_id : root, dist_max})            
     }
 
 
@@ -81,11 +85,11 @@ impl<'a> BKTreeWords<'a>
             //By above condition, there is atleast one element in the stack.
             let current_node_id = nodes_to_process.pop().unwrap();
             let current_node = &self.bk_tree[current_node_id]; //maybe use .get syntax here!!
-            let current_dist = (self.dist_fn)(current_node.get().0, word_to_check.as_bytes());
+                let current_dist = lev_dist_opt(&current_node.get().0, &word_to_check.as_bytes());
 
 
             if current_dist < best_dist {
-                (best_word, best_dist) = (current_node.get().0, current_dist);
+                (best_word, best_dist) = (&current_node.get().0, current_dist);
             }
 
 

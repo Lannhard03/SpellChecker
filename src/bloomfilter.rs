@@ -1,10 +1,13 @@
-use std::hash::{Hasher, BuildHasher};
-use ahash::RandomState;
+use std::hash::Hasher;
+use siphasher::sip::SipHasher;
 use crate::data::WordDict;
+use bincode::{Encode, Decode};
 
+#[derive(Encode, Decode)]
 pub struct BloomFilter {
     array: Vec<bool>,
-    hashers: [ahash::AHasher; 2], 
+    #[bincode(with_serde)]
+    hashers: [SipHasher; 2], 
     pub optimal_len: u64,
     pub optimal_num_hashers: u32,
 }
@@ -16,9 +19,8 @@ impl<'a> BloomFilter {
         let two: f32 = 2.0;
         let optimal_num_hashers = -(accepted_error_rate.ln()/two.ln()) as u32;
         let optimal_len = ((data.len() as f32)*(-accepted_error_rate.ln()/(two.ln()).powi(2))) as u64;
-        
-        let hasher_1 = RandomState::new().build_hasher();
-        let hasher_2 = RandomState::new().build_hasher();
+        let hasher_1 = SipHasher::new();    
+        let hasher_2 = SipHasher::new();    
         let hashers = [hasher_1, hasher_2];
          
         let array: Vec<bool> = vec![false; optimal_len as usize];

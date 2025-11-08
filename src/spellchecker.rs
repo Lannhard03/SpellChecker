@@ -4,16 +4,17 @@ use crate::bktree::BKTreeWords;
 use crate::bloomfilter::BloomFilter;
 use crate::data::{Text, SpellingError};
 use rayon::prelude::*;
+use bincode::{Encode, Decode};
 
-
-pub struct SpellChecker<'a> {
-    bk_tree: BKTreeWords<'a>,
+#[derive(Encode, Decode)]
+pub struct SpellChecker {
+    bk_tree: BKTreeWords,
     bloom_filter: BloomFilter,
 }
 
 
-impl<'a> SpellChecker<'a> {
-    pub fn new(bk_tree: BKTreeWords<'a>, bloom_filter: BloomFilter) -> Self {
+impl<'a> SpellChecker {
+    pub fn new(bk_tree: BKTreeWords, bloom_filter: BloomFilter) -> Self {
         SpellChecker {bk_tree, bloom_filter}
     }
 

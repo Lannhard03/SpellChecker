@@ -1,4 +1,5 @@
 use core::fmt;
+use std::path::Path;
 use std::fs;
 use unicode_segmentation::UnicodeSegmentation;
 
@@ -10,6 +11,7 @@ pub struct WordDict {
 
 pub struct Text {
     words: Vec<(usize, String)>,
+    name: String,
 }
 
 
@@ -44,7 +46,6 @@ impl WordDict {
         Self { frequency_data }
     }
 
-
     pub fn load_data(data_path: &str) -> Result<WordDict, std::io::Error> {
         let dict_text = fs::read_to_string(data_path)?;
         let dict_data = dict_text.lines()
@@ -71,6 +72,7 @@ impl WordDict {
     }
 
 
+
     pub fn len(&self) -> usize {
         self.frequency_data.len()
     }
@@ -93,12 +95,19 @@ impl Text {
                  }).collect()
         };
 
-
-        Ok(Text{ words: data})
+        
+        let file_name = match Path::new(text_path).file_name() {
+            Some(os_str) => {os_str.to_str().unwrap_or("text")},
+            None => {"text"}
+        };
+        Ok(Text{words: data, name: String::from(file_name) })
     }
 
 
     pub fn get_text(&self) -> &Vec<(usize, String)> {
         &self.words
+    }
+    pub fn get_name(&self) -> &String {
+        &self.name
     }
 }
